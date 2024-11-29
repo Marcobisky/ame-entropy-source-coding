@@ -1,0 +1,6 @@
+# Ignore folders
+/Report/
+/Reference/
+
+# Ignore docx files
+*.docx

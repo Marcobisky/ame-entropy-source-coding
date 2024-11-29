@@ -64,4 +64,4 @@ def decode(encoded_file, decoded_file):
         f.write("".join(decoded_output).encode())
 
 if __name__ == "__main__":
-    decode("markov_encoded.txt", "markov_decoded.txt")
+    decode("processed.txt", "received.txt")

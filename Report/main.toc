@@ -1,2 +1,23 @@
-\contentsline {section}{\numberline {1}Task 1}{2}{}%
-\contentsline {section}{\numberline {A}MATLAB Code for Task 3 (d)}{3}{}%
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {section}{\numberline {2}Compression is Equivalent to Prediction}{4}{section.2}%
+\contentsline {section}{\numberline {3}Mechanism of AME Coding}{5}{section.3}%
+\contentsline {section}{\numberline {4}Entropy Coding Review}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Mechanism of Huffman coding}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Mechanism of Fano coding}{6}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Implementation}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Without AME}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}With AME}{8}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Results and Discussion}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Performance comparison between Huffman and Fano coding}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Performance analysis of AME coding}{10}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Conclusion and Future Work}{10}{section.7}%
+\contentsline {section}{\numberline {A}AME encode/decode algorithm}{12}{appendix.a.A}%
+\contentsline {section}{\numberline {B}Python code for AME encoding}{14}{appendix.a.B}%
+\contentsline {section}{\numberline {C}Python code for AME decoding}{16}{appendix.a.C}%
+\contentsline {section}{\numberline {D}Huffman Tree Generated for \texttt {original.txt}}{18}{appendix.a.D}%
+\contentsline {section}{\numberline {E}MATLAB code for huffman encode/decode procedure}{19}{appendix.a.E}%
+\contentsline {section}{\numberline {F}MATLAB code for huffman encode/decode procedure}{21}{appendix.a.F}%
+\contentsline {section}{\numberline {G}Part of the \texttt {original.txt}}{24}{appendix.a.G}%
+\contentsline {section}{\numberline {H}Part of the \texttt {binary\_huffman.txt}}{24}{appendix.a.H}%
+\contentsline {section}{\numberline {I}Part of the \texttt {processed.txt}}{24}{appendix.a.I}%
+\contentsline {section}{\numberline {J}Metrics Definitions}{25}{appendix.a.J}%

@@ -1,8 +1,0 @@
-Name,Value,Class
-binary_codes,2x1,cell
-binary_encoded,1x21300,char
-decoded_text,0x0,char
-dictionary_file,1x14,char
-encoded_file,1x11,char
-output_file,1x11,char
-symbols,3x1,char

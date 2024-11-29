@@ -55,4 +55,4 @@ def encode(source_file, output_file):
         f.write("".join(encoded_output).encode())
 
 if __name__ == "__main__":
-    encode("source.txt", "markov_encoded.txt")
+    encode("original.txt", "processed.txt")
