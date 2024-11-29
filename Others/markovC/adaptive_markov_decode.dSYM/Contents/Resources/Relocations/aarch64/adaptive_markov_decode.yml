@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/markren/LocalFiles/Labs/InfoThy/markovC/adaptive_markov_decode'
+relocations:     []
+...
