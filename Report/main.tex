@@ -30,8 +30,6 @@
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{3pt}
 
-% % For svg
-% \usepackage{svg}
 
 % ++++++++++++++++++++++++++Code global config begin++++++++++++++++++++++++++
 % Code block universal settings, all lstdefinestyle must appeared below this block!
@@ -142,7 +140,7 @@
 \newpage
 \tableofcontents
 
-
+\newpage
 \listoffigures
 \listoftables
 \newpage
@@ -160,15 +158,17 @@ In this project, we explore the application of Huffman Coding and Fano Coding, t
 Using MATLAB, we implemented both methods to encode and decode the first three chapters of a selected text, generating metrics such as average code length, code rate, efficiency, and compression ratio for comparison. Additionally, we introduced a important change-of-perspective that compression is essentially the same as prediction. Based on this idea, we introduced a novel pre-processing technique, Second-order Adaptive Markov Encoding (AME), designed to enhance the compression performance by uncovering structural patterns in the source text. The efficiency of AME was also evaluated.
 
 
-\section{Compression is Equivalent to Prediction}
+\section{The Idea of AME Coding}
 
-In this section, we state the motivation behind AME coding. 
+\subsection{Compression is Equivalent to Prediction}
 
-Both huffman coding and fano coding are based on the assumption that the source is \textit{discrete memoryless}. They are trying to approach the compression limit (which is the entropy of the source \cite{ref1}) given that the original source looks random. So they are called ``entropy coding''. However, in practice, the texts inherently take some structures that cannot be explicitly captured by any relative simple models. These structures are not considered when performing entropy coding, so we wasted some potential compression ratio.
+In this section, we state the motivation and basic idea behind AME coding. 
 
-No matter what coding method we choose, such as LZ77 \cite{ref6, ref7}, the last step them is always entropy coding. But entropy coding is well-understood and mature (Huffman being the ``optimal'' in some sense). Therefore, the only way to improve compression ratio is to uncover the structure of the source. We need to design a better model first to capture and hiding those structures while exposing the true ``memoryless components'' of the source, then the utility of entropy coding can be maximized.
+Both huffman coding and fano coding are based on the assumption that the source is \textit{memoryless}. They are trying to approach the compression limit (which is the entropy of the source \cite{ref1}) given that the original source looks random. So they are called ``entropy coding''. However, in practice, the texts inherently take some structures that cannot be explicitly captured by any relative simple models. These structures are not considered when performing entropy coding, so we wasted some potential compression ratio.
 
-The basic idea behind AME coding is that compression is equivalent to \textit{prediction}. We are essentially building a same text predictor in both sides of the transmitter and the receiver. As long as the predicted next character matches the true one, that character is not considered as the ``memoryless component'' of the source (it depends on the history text). But if the predicted one doesn't match the true one, this means there are somewhat ``random'' factors come into play. If we can proposed some encoding strategy that makes the predictor works exactly the same on both the transmitter and receiver, we only need to transmit the ``memoryless components'' and the number of correct predictions. 
+No matter what coding method we choose, such as LZ77 \cite{ref6, ref7}, the last step of them is always entropy coding. But entropy coding is well-understood and mature (Huffman being the ``optimal'' in some sense). Therefore, the only way to improve compression ratio is to uncover the structure of the source. We need to design a better model first to capture and hiding those structures while exposing the true ``memoryless components'' of the source, then the utility of entropy coding can be maximized.
+
+The basic idea behind AME coding is that \textit{compression} is equivalent to \textit{prediction}. We are essentially building a same text predictor in both sides of the transmitter and the receiver. As long as the predicted next character matches the true one, that character is not considered as the ``memoryless component'' of the source (it depends on the history text). But if the predicted one doesn't match the true one, this means there are somewhat ``random'' factors come into play. If we can proposed some encoding strategy that makes the predictor works exactly the same on both the transmitter and receiver, we only need to transmit the ``memoryless components'' and the number of correct predictions. 
 
 For example, if we want to extract the ``memoryless components'' of the following content:
 
@@ -183,15 +183,15 @@ Feed it into the predictor, suppose we can correctly predict the character in po
 I1fo7 th5i2int9
 \end{lstlisting}
 
-The rest letters are somehow losed some internal dependence and can be approximately considered as memoryless. 
+The rest letters are somehow losed some internal dependence and can be approximately considered as ``memoryless''. 
 
-We can see in this example the efficiency of compression directly relies on how well we extract the ``memoryless components'' of the text, in other words, the performance of the predictor. Since human language is the product of human mind, which definitely cannot be modelled using just a few parameters. An accurate predictor would need millions of parameters, which is essentially a neural network \cite{ref5}. However, due to time and space complexity, using a neural network to predict the next character is not feasible in practice. However, we can use a simpler model called markov chain to capture some of the structures in the text.
+We can see in this example the efficiency of compression directly relies on how well we extract the ``memoryless components'' of the text, in other words, the performance of the predictor. Since human language is the product of human mind, which definitely cannot be modelled using just a few parameters. An accurate predictor would need millions of parameters, which is essentially a neural network \cite{ref5}. However, due to time and space complexity, using a neural network to predict the next character is not feasible in practice. However, we can use a simpler model called markov chain to capture some of the structures in the text. The markov chain is built with the encoding/decoding process, so it is called ``adaptive''.
 
-\section{Mechanism of AME Coding}
+\subsection{Mechanism of AME Coding}
 \label{sec:markov}
 
 
-We assume no prior knowledge of the source. So the predictor is built simultaneously with the encode/decode process. The algorithm for AME encoding and decoding are shown in Algorithm~\ref{alg:markov_encode} and \ref{alg:markov_decode} in Appendix~\ref{app:AMEalgo}. The codes are written in Python and can be found in the appendix~\ref{app:markov_encode} and \ref{app:markov_decode}.
+We assume no prior knowledge of the source. So the predictor is built simultaneously with the encode/decode process. We used markov chain to model the process. With the inspiration in \cite{ref1}, we use a tree (a weighted digraph in formal terms) to represent the markov process. The algorithm for AME encoding and decoding are shown in Algorithm~\ref{alg:markov_encode} and \ref{alg:markov_decode} in Appendix~\ref{app:AMEalgo1} and \ref{app:AMEalgo2}. The codes are written in Python and can be found in the appendix~\ref{app:markov_encode} and \ref{app:markov_decode}.
 
 \begin{figure}[h!]
     \centering
@@ -206,7 +206,18 @@ We will take an example to show how AME works. Let's consider the following text
 catcatme
 \end{lstlisting}
 
-As shown in Figure~\ref{fig:AMEtree}.The first character is \texttt{'c'}, so we add \texttt{'c'} to the AME tree, mark the weight 1 and add it to the output buffer. The next character is \texttt{'a'}, so we add \texttt{'a'} to the AME tree, mark the weight also 1 and also add it to the output buffer. Repeat this process until we could possibly ``predict'' the next character. The first correct prediction is the 5th character \texttt{'a'}. The next prediction (\texttt{'t'}) is also right. But the character after that is \texttt{'m'} and \texttt{'e'}, which are not in the tree, thus we then add them to the tree. Therefore, the output buffer is:
+The building process is shown in Figure~\ref{fig:AMEtree}. It is summarized as follows:
+
+\begin{enumerate}
+    \item Initially, the tree is empty. The first character in the text is \texttt{`c'}, so we add \texttt{`c'} to the AME tree, mark the weight 1 (since first appearance) and add it directly to the output buffer. 
+    \item The next character is \texttt{`a'}, so we add \texttt{`a'} to the AME tree, mark the weight also 1 and also add it to the output buffer. 
+    \item Repeat this process until we could possibly ``predict'' the next character, i.e., the arrow with the highest weight in the tree from the current character leads to the correct character appeared in the text (If there are multiple arrows with the same highest weight, we take the most recent one).
+    \item The first correct prediction is the 5th character (\texttt{`a'}). We increase the weight from \texttt{`c'} to \texttt{`a'} by 1 and continue to predict the next character.
+    \item The next prediction (\texttt{`t'}) is also right. We increase the weight from \texttt{`a'} to \texttt{`t'} by 1 and continue to predict the next character.
+    \item But the next two characters after \texttt{`t'} are \texttt{`m'} and \texttt{`e'}, which are not even in the tree! Thus we first add the number of correct predictions in history (which is 2) and then add the two new characters (\texttt{`m'} and \texttt{`e'}) to the tree. 
+\end{enumerate}
+
+Therefore, the output buffer is:
 
 \begin{lstlisting}[language=bash, style=custombash]
 catc2me
@@ -234,7 +245,7 @@ We performed two seperated experiments for different purposes. The first is to r
 
 \subsection{Without AME}
 
-The encode/decode process in shown in the form of a flowchart shown in Figure~\ref{fig:without-ame}.
+The encode/decode process is shown in the form of a flowchart shown in Figure~\ref{fig:without-ame}.
 
 \begin{figure}[h!]
     \centering
@@ -245,43 +256,14 @@ The encode/decode process in shown in the form of a flowchart shown in Figure~\r
 
 The content in \texttt{original.txt} contains the first three chapters of \textit{the Game of Thrones}. Part of the \texttt{original.txt} is shown in Appendix~\ref{lst:originalpart}.
 
-In order to perform huffman/fano coding on the text, we first need to calculate the frequency of each character in the text. The frequency of each character is shown in Table~\ref{tab:frequency}.
+In order to perform huffman/fano coding on the text, we first need to calculate the frequency of each character in the text. According to statistics, the distribution of all characters in shown in Figure~\ref{fig:originalStat}. The detailed frequency table of each character is shown in Appendix~\ref{app:originalStat}.
 
-\begin{longtable}{ccc||ccc||ccc}
-    \caption{Frequency of each character in \texttt{original.txt}}
-    \label{tab:frequency} \\
-    \toprule
-    \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} \\ \hline
-    \endfirsthead
-    \hline
-    \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} \\ \hline
-    \endhead
-    \hline
-    \endfoot
-    1 & (LF) & 0.0052 & 2 & (CR) & 0.0052 & 3 & (Space) & 0.1915 \\ 
-    4 & ! & 0.00020423 & 5 & , & 0.0127 & 6 & - & 0.001 \\ 
-    7 & . & 0.0165 & 8 & 1 & 2.0423e-05 & 9 & 2 & 2.0423e-05 \\ 
-    10 & : & 4.0846e-05 & 11 & ; & 0.00024507 & 12 & ? & 0.002 \\ 
-    13 & A & 0.0013 & 14 & B & 0.0017 & 15 & C & 0.00055141 \\ 
-    16 & D & 0.00036761 & 17 & E & 0.00038803 & 18 & F & 0.00079649 \\ 
-    19 & G & 0.0011 & 20 & H & 0.0024 & 21 & I & 0.0026 \\ 
-    22 & J & 0.001 & 23 & K & 0.00020423 & 24 & L & 0.00055141 \\ 
-    25 & M & 0.00051057 & 26 & N & 0.0011 & 27 & O & 0.00046972 \\ 
-    28 & P & 0.00022465 & 29 & R & 0.0017 & 30 & S & 0.0014 \\ 
-    31 & T & 0.0037 & 32 & U & 0.00014296 & 33 & V & 8.1691e-05 \\ 
-    34 & W & 0.0034 & 35 & Y & 0.00061268 & 36 & a & 0.0585 \\ 
-    37 & b & 0.0109 & 38 & c & 0.0135 & 39 & d & 0.0414 \\ 
-    40 & e & 0.0959 & 41 & f & 0.0156 & 42 & g & 0.016 \\ 
-    43 & h & 0.052 & 44 & i & 0.0435 & 45 & j & 0.00061268 \\ 
-    46 & k & 0.0079 & 47 & l & 0.035 & 48 & m & 0.0154 \\ 
-    49 & n & 0.0476 & 50 & o & 0.0546 & 51 & p & 0.0079 \\ 
-    52 & q & 0.0004493 & 53 & r & 0.0451 & 54 & s & 0.0475 \\ 
-    55 & t & 0.0606 & 56 & u & 0.0174 & 57 & v & 0.0051 \\ 
-    58 & w & 0.0192 & 59 & x & 0.00028592 & 60 & y & 0.0139 \\ 
-    61 & z & 0.00036761 & 62 & ' & 0.0026 & 63 & `` & 0.0051 \\ 
-    64 & '' & 0.0051 & 65 & . & 4.0846e-05 &  &  &  \\ 
-    \bottomrule
-\end{longtable}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{originalStat.png}
+    \caption{Distribution of each character in the \texttt{original.txt}}
+    \label{fig:originalStat}
+\end{figure}
 
 According to the frequency of each character, we can create the Huffman/fano tree based on the methods in Section~\ref{sec:huffman} and \ref{sec:fano} and generate the huffman/fano dictionaries\footnote{The dictionaries together with all codes can be found on \url{https://github.com/Marcobisky/ame-entropy-source-coding}}. We then use this dictionary to encode the text and calculate the four main metrics including average code length $\bar{L}$, code rate $R$, efficiency $\eta$, and compression ratio $\xi$. The results are shown in Section~{sec:result}. 
 
@@ -302,45 +284,14 @@ The experiment procedure of the encode/decode process in shown in Figure~\ref{fi
 
 The only difference of this part is that we added a block called ``Second-order Adaptive Markov Approximation'' before applying the entropy encode/decode. Using the method in Section~\ref{sec:markov}, we get the AME-encoded text (\texttt{processed.txt}). Part of the content of (\texttt{processed.txt}) is shown in Appendix~\ref{lst:processedpart}.
 
-Then we apply the same procedure for \texttt{processed.txt} as we did for \texttt{original.txt}. Note this time the frequency of each character is different from the original text as shown in Table~
+Then we apply the same procedure for \texttt{processed.txt} as we did for \texttt{original.txt}. Note this time the frequency of each character is different from the original text. For example, there are no numbers in \texttt{original.txt} but there are in \texttt{processed.txt}. According to statistics, the distribution of all characters in shown in Figure~\ref{fig:processedStat}. The detailed frequency table of each character is shown in Appendix~\ref{app:processedStat}.
 
-\begin{longtable}{ccc||ccc||ccc}
-    \toprule
-    \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} \\ \hline
-    \endfirsthead
-    \hline
-    \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} & \textbf{Index} & \textbf{Symbol} & \textbf{Probability} \\ \hline
-    \endhead
-    \hline
-    \endfoot
-    1 & (Space) & 2.2477e-05 & 2 & (CR) & 0.0057 & 3 & (LF) & 0.0652 \\ 
-    4 & ! & 0.00022477 & 5 & , & 0.014 & 6 & - & 0.0011 \\ 
-    7 & . & 0.0182 & 8 & 1 & 0.1721 & 9 & 2 & 0.0344 \\ 
-    10 & 3 & 0.006 & 11 & 4 & 0.0057 & 12 & 5 & 0.0069 \\ 
-    13 & 6 & 0.0017 & 14 & 7 & 0.00013486 & 15 & 8 & 2.2477e-05 \\ 
-    16 & : & 4.4954e-05 & 17 & ; & 0.00026972 & 18 & ? & 0.0022 \\ 
-    19 & A & 0.0015 & 20 & B & 0.0019 & 21 & C & 0.00060688 \\ 
-    22 & D & 0.00038211 & 23 & E & 0.00042706 & 24 & F & 0.0008766 \\ 
-    25 & G & 0.0012 & 26 & H & 0.0027 & 27 & I & 0.0028 \\ 
-    28 & J & 0.0011 & 29 & K & 0.00022477 & 30 & L & 0.00060688 \\ 
-    31 & M & 0.00056192 & 32 & N & 0.0013 & 33 & O & 0.00051697 \\ 
-    34 & P & 0.00024725 & 35 & R & 0.0019 & 36 & S & 0.0016 \\ 
-    37 & T & 0.0034 & 38 & U & 0.00015734 & 39 & V & 8.9908e-05 \\ 
-    40 & W & 0.0036 & 41 & Y & 0.00067431 & 42 & a & 0.0571 \\ 
-    43 & b & 0.0119 & 44 & c & 0.0148 & 45 & d & 0.0454 \\ 
-    46 & e & 0.0484 & 47 & f & 0.0171 & 48 & g & 0.0176 \\ 
-    49 & h & 0.0284 & 50 & i & 0.0459 & 51 & j & 0.00067431 \\ 
-    52 & k & 0.0085 & 53 & l & 0.0319 & 54 & m & 0.0169 \\ 
-    55 & n & 0.0259 & 56 & o & 0.0555 & 57 & p & 0.0087 \\ 
-    58 & q & 0.00049449 & 59 & r & 0.0477 & 60 & s & 0.0501 \\ 
-    61 & t & 0.039 & 62 & u & 0.0103 & 63 & v & 0.0055 \\ 
-    64 & w & 0.0212 & 65 & x & 0.00031468 & 66 & y & 0.0153 \\ 
-    67 & z & 0.00040459 & 68 & ' & 0.0028 & 69 & `` & 0.0056 \\ 
-    70 & '' & 0.0043 & 71 & . & 4.4954e-05 &  &  &  \\ 
-    \bottomrule
-\end{longtable}
-
-
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{processedStat.png}
+    \caption{Distribution of each character in the \texttt{processed.txt}}
+    \label{fig:processedStat}
+\end{figure}
 
 
 
@@ -361,13 +312,13 @@ The four main metrics of Huffman and Fano coding are shown in Table~\ref{tab:met
     \caption{Performance Metrics for Huffman and Fano Coding}
     \label{tab:metrics}
     \centering
-    \begin{tabular}{lccc}
+    \begin{tabular}{l|ccc}
     \toprule
     \textbf{Parameter} & \textbf{Symbol} & \textbf{Huffman} & \textbf{Fano} \\ \hline
-    Average Code Length & $\bar{L}$ & 4.4769 & 8.6370 \\ 
-    Code Rate & $R$ & 0.9897 & 0.5117      \\ 
-    Efficiency & $\eta$ & 0.9897 & 0.5117  \\ 
-    Compression Rate & $\xi$ & 0.5596 & 1.0796  \\ 
+    Average Code Length & $\bar{L}$ & 4.5023 & 8.4244 \\ 
+    Code Rate & $R$ & 0.9909 & 0.5282      \\ 
+    Efficiency & $\eta$ & 0.9909 & 0.5282  \\ 
+    Compression Rate & $\xi$ & 0.5628 & 1.0530  \\ 
     \bottomrule
     \end{tabular}
 \end{table}
@@ -391,25 +342,38 @@ All above further highlights the superiority of Huffman Coding.
 
 \subsection{Performance analysis of AME coding}
 
-Since we pre-processed the \texttt{original.txt} before fed into the entropy coding, we cannot directly compute the four metrics for it. So we compared the length of \texttt{binary.txt} file generated in the two methods. 
+Since we pre-processed the \texttt{original.txt} before fed into the entropy coding, we cannot directly compute the four metrics of it. So we compared the length of \texttt{binary.txt} file generated in the two methods. 
 
 Let the length of the \texttt{binary\_huffman.txt} and \texttt{binary\_fano.txt} be $L_{\text{h}}$ and $L_{\text{f}}$, respectively. Table~\ref{tab:amematrics} shows how using AME could save the length of the binary file.
 
+% \begin{table}[h!]
+%     \caption{AME saves the length of binary file}
+%     \label{tab:amematrics}
+%     \centering
+%     \begin{tabular}{l||cc}
+%     \toprule
+%      & $L_{\text{h}}$ & $L_{\text{f}}$ \\ \hline
+%     With AME & 207797 & 209343  \\ 
+%     Without AME & 217014 & 218913 \\ 
+%     Saved & 5.25\% & 4.37\% \\ 
+%     \bottomrule
+%     \end{tabular}
+% \end{table}
+
 \begin{table}[h!]
-    \caption{AME saves the length of binary file}
+    \caption{AME shortened the length of the binary file}
     \label{tab:amematrics}
     \centering
-    \begin{tabular}{lcc}
+    \begin{tabular}{l|cccc}
     \toprule
-     & $L_{\text{h}}$ & $L_{\text{f}}$ \\ \hline
-    With AME & 211066 & 212752  \\ 
-    Without AME & 219213 & 223058 \\ 
-    Saved & 96.28\% & 95.38\% \\ 
+    \textbf{Parameter} & \textbf{Symbol} & \textbf{With AME} & \textbf{Without AME} & \textbf{Improved} \\ \hline
+    Huffman Binary Length & $L_{\text{h}}$ & 207797 & 217014 & 5.25\%  \\ 
+    Fano Binary Length & $L_{\text{f}}$ & 209343 & 218913 & 4.37\% \\ 
     \bottomrule
     \end{tabular}
 \end{table}
 
-
+This result shown that AME + Huffman/Fano coding could save about 5.25\% and 4.37\% of the length of the binary file, respectively. 
 
 
 \section{Conclusion and Future Work}
@@ -422,21 +386,21 @@ Future work could involve using higher order Markov models or new mathematical m
 
 
 
-
+\addcontentsline{toc}{section}{References}
 \begin{thebibliography}{9}
-    \bibitem{ref1} C. E. Shannon, ``A Mathematical Theory of Communication''.
+    \bibitem{ref1} C. E. Shannon, ``A Mathematical Theory of Communication,'' \textit{The Bell System Technical Journal}, vol. 27, no. 3, pp. 379–423, July 1948, doi: 10.1002/j.1538-7305.1948.tb01338.x.
+
+    \bibitem{ref6} J. Ziv and A. Lempel, “A universal algorithm for sequential data compression,” \textit{IEEE Trans}. Inform. Theory, vol. 23, no. 3, pp. 337–343, May 1977, doi: 10.1109/TIT.1977.1055714.
+
+    \bibitem{ref7} A. D. Wyner and J. Ziv, “The sliding-window Lempel-Ziv algorithm is asymptotically optimal,” \textit{Proc. IEEE}, vol. 82, no. 6, pp. 872–877, Jun. 1994, doi: 10.1109/5.286191.
+
+    \bibitem{ref5} T. Sharma et al., ``A Survey on Machine Learning Techniques for Source Code Analysis,'' Sep. 13, 2022, arXiv: arXiv:2110.09610. doi: 10.48550/arXiv.2110.09610.
 
     \bibitem{ref2} Advances in Communication and Computing Technologies (ICACACT 2014), Mumbai, India, 2014, pp. 1-6, doi: 10.1109/EIC.2015.7230711.
 
     \bibitem{ref3} N. Dhawale, ``Implementation of Huffman algorithm and study for optimization,'' 2014 International Conference on Advances in Communication and Computing Technologies (ICACACT 2014), Mumbai, India, 2014, pp. 1-6, doi: 10.1109/EIC.2015.7230711.
 
-    \bibitem{ref4} S. Congero and K. Zeger, ``Competitive Advantage of Huffman and Shannon-Fano Codes,'' in IEEE Transactions on Information Theory, vol. 70, no. 11, pp. 7581-7598, Nov. 2024, doi: 10.1109/TIT.2024.3417010.
-
-    \bibitem{ref5} T. Sharma et al., ``A Survey on Machine Learning Techniques for Source Code Analysis,'' Sep. 13, 2022, arXiv: arXiv:2110.09610. doi: 10.48550/arXiv.2110.09610.
-
-    \bibitem{ref6} J. Ziv and A. Lempel, “A universal algorithm for sequential data compression,” IEEE Trans. Inform. Theory, vol. 23, no. 3, pp. 337–343, May 1977, doi: 10.1109/TIT.1977.1055714.
-
-    \bibitem{ref7} A. D. Wyner and J. Ziv, “The sliding-window Lempel-Ziv algorithm is asymptotically optimal,” Proc. IEEE, vol. 82, no. 6, pp. 872–877, Jun. 1994, doi: 10.1109/5.286191.
+    \bibitem{ref4} S. Congero and K. Zeger, ``Competitive Advantage of Huffman and Shannon-Fano Codes,'' in \textit{IEEE Transactions on Information Theory}, vol. 70, no. 11, pp. 7581-7598, Nov. 2024, doi: 10.1109/TIT.2024.3417010.
 
 
 
@@ -448,8 +412,9 @@ Future work could involve using higher order Markov models or new mathematical m
 
 \begin{appendices}
 
-\section{AME encode/decode algorithm}
-\label{app:AMEalgo}
+\section{AME Coding Scheme}
+\subsection{AME encode algorithm}
+\label{app:AMEalgo1}
 
 \begin{algorithm}
     \caption{Adaptive Markov Encoding}
@@ -485,6 +450,9 @@ Future work could involve using higher order Markov models or new mathematical m
     \STATE Write \texttt{encoded\_output} to \texttt{markov\_encoded.txt}
     \end{algorithmic}
 \end{algorithm}
+\newpage
+\subsection{AME decode algorithm}
+\label{app:AMEalgo2}
 
 \begin{algorithm}
     \caption{Adaptive Markov Decoding}
@@ -522,30 +490,46 @@ Future work could involve using higher order Markov models or new mathematical m
 \end{algorithm}
 
 \newpage
-\section{Python code for AME encoding}
+\subsection{Python code for AME encoding}
 \label{app:markov_encode}
 
 \lstinputlisting[caption={AME encoder}, label={lst:markov_encode}, language=Python, style=custompython]{../markovpy/adaptive_markov_encode.py} % python
 
 \newpage
-\section{Python code for AME decoding}
+\subsection{Python code for AME decoding}
 \label{app:markov_decode}
 
 \lstinputlisting[caption={AME decoder}, label={lst:markov_decode}, language=Python, style=custompython]{../markovpy/adaptive_markov_decode.py} % python
 
 \newpage
-\section{Huffman Tree Generated for \texttt{original.txt}}
+\section{Huffman Tree Visualization}
+\subsection{Huffman Tree Generated for \texttt{original.txt}}
 \label{app:huffmanTree}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{huffmanTree.png}
-    \caption{Huffman tree visualization}
+    \hspace*{-1.3cm}
+    \includegraphics[width=1.15\textwidth]{huffmanTree.png}
+    \caption{Huffman tree visualized for \texttt{original.txt}}
     \label{fig:huffmanTree}
 \end{figure}
 
 \newpage
-\section{MATLAB code for huffman encode/decode procedure}
+\subsection{Fano Tree Generated for \texttt{processed.txt}}
+\label{app:huffmanTreeAME}
+
+\begin{figure}[h!]
+    \centering
+    \hspace*{-1.4cm}
+    \includegraphics[width=1.15\textwidth]{huffmanTree_ame.png}
+    \caption{Huffman tree visualized for \texttt{processed.txt}}
+    \label{fig:huffmanTreeAME}
+\end{figure}
+
+
+\newpage
+\section{Entropy Coding Scheme}
+\subsection{MATLAB code for Huffman encode/decode procedure}
 \label{app:huffman}
 
 \lstinputlisting[caption={Huffman encode procedure (without AME example)}, language=Matlab, style=custommatlab]{../huffman/withoutAME/huffman_encode.m} % matlab code from file
@@ -555,7 +539,7 @@ Future work could involve using higher order Markov models or new mathematical m
 \lstinputlisting[caption={Main function to perform Huffman encode/decode}, language=Matlab, style=custommatlab]{../huffman/withoutAME/mainHuffman.m} % matlab code from file
 
 \newpage
-\section{MATLAB code for huffman encode/decode procedure}
+\subsection{MATLAB code for Fano encode/decode procedure}
 \label{app:fano}
 
 \lstinputlisting[caption={Fano encode procedure (without AME example)}, language=Matlab, style=custommatlab]{../fano/withoutAME/fano_encode.m} % matlab code from file
@@ -565,23 +549,99 @@ Future work could involve using higher order Markov models or new mathematical m
 \lstinputlisting[caption={Main function to perform Fano encode/decode}, language=Matlab, style=custommatlab]{../fano/withoutAME/mainFano.m} % matlab code from file
 
 \newpage
-\section{Part of the \texttt{original.txt}}
+\section{Characters Statistics}
+\subsection{Statistics in \texttt{original.txt}}
+\label{app:originalStat}
+
+\begin{longtable}{ccc||ccc||ccc}
+    \caption{Frequency of each character in \texttt{original.txt}}
+    \label{tab:originalStat} \\
+    \toprule
+    \textbf{ASCII} & \textbf{Char} & \textbf{Probability} & \textbf{ASCII} & \textbf{Char} & \textbf{Probability} & \textbf{ASCII} & \textbf{Char} & \textbf{Probability} \\ \hline
+    \endfirsthead
+    10 & \textbackslash n & 0.005249 & 32 & sp & 0.178751 & 65 & A & 0.001349 \\
+    13 & \textbackslash r & 0.005249 & 33 & ! & 0.000207 & 66 & B & 0.001743 \\
+    44 & , & 0.012904 & 45 & - & 0.001058 & 67 & C & 0.000560 \\
+    46 & . & 0.016784 & 58 & : & 0.000041 & 68 & D & 0.000373 \\
+    59 & ; & 0.000249 & 63 & ? & 0.001992 & 69 & E & 0.000394 \\
+    70 & F & 0.000809 & 71 & G & 0.001141 & 72 & H & 0.002448 \\
+    73 & I & 0.002676 & 74 & J & 0.001037 & 75 & K & 0.000207 \\
+    76 & L & 0.000560 & 77 & M & 0.000519 & 78 & N & 0.001162 \\
+    79 & O & 0.000477 & 80 & P & 0.000228 & 82 & R & 0.001722 \\
+    83 & S & 0.001452 & 84 & T & 0.003776 & 85 & U & 0.000145 \\
+    86 & V & 0.000083 & 87 & W & 0.003423 & 89 & Y & 0.000622 \\
+    97 & a & 0.059459 & 98 & b & 0.011058 & 99 & c & 0.013693 \\
+    100 & d & 0.042074 & 101 & e & 0.097405 & 102 & f & 0.015830 \\
+    103 & g & 0.016286 & 104 & h & 0.052779 & 105 & i & 0.044148 \\
+    106 & j & 0.000622 & 107 & k & 0.008029 & 108 & l & 0.035518 \\
+    109 & m & 0.015622 & 110 & n & 0.048339 & 111 & o & 0.055476 \\
+    112 & p & 0.008070 & 113 & q & 0.000456 & 114 & r & 0.045829 \\
+    115 & s & 0.048215 & 116 & t & 0.061534 & 117 & u & 0.017697 \\
+    118 & v & 0.005207 & 119 & w & 0.019522 & 120 & x & 0.000290 \\
+    121 & y & 0.014108 & 122 & z & 0.000373 &  &  &  \\
+    \bottomrule
+\end{longtable}
+
+\newpage
+\subsection{Statistics in \texttt{processed.txt}}
+\label{app:processedStat}
+
+\begin{longtable}{ccc||ccc||ccc}
+    \caption{Frequency of each character in \texttt{processed.txt}}
+    \label{tab:processedStat} \\
+    \toprule
+    \textbf{ASCII} & \textbf{Char} & \textbf{Probability} & \textbf{ASCII} & \textbf{Char} & \textbf{Probability} & \textbf{ASCII} & \textbf{Char} & \textbf{Probability} \\ \hline
+    \endfirsthead
+    10 & \textbackslash n & 0.000023 & 32 & sp & 0.054662 & 65 & A & 0.001482 \\
+    13 & \textbackslash r & 0.005770 & 33 & ! & 0.000228 & 66 & B & 0.001916 \\
+    44 & , & 0.014184 & 45 & - & 0.001163 & 67 & C & 0.000616 \\
+    46 & . & 0.018449 & 49 & 1 & 0.177715 & 68 & D & 0.000388 \\
+    50 & 2 & 0.031083 & 51 & 3 & 0.006134 & 69 & E & 0.000433 \\
+    52 & 4 & 0.005678 & 53 & 5 & 0.007092 & 70 & F & 0.000889 \\
+    54 & 6 & 0.001893 & 55 & 7 & 0.000137 & 71 & G & 0.001254 \\
+    56 & 8 & 0.000023 & 58 & : & 0.000046 & 72 & H & 0.002691 \\
+    59 & ; & 0.000274 & 63 & ? & 0.002189 & 73 & I & 0.002873 \\
+    74 & J & 0.001140 & 75 & K & 0.000228 & 76 & L & 0.000616 \\
+    77 & M & 0.000570 & 78 & N & 0.001277 & 79 & O & 0.000525 \\
+    80 & P & 0.000251 & 82 & R & 0.001893 & 83 & S & 0.001596 \\
+    84 & T & 0.003421 & 85 & U & 0.000160 & 86 & V & 0.000091 \\
+    87 & W & 0.003603 & 89 & Y & 0.000684 & 97 & a & 0.057969 \\
+    98 & b & 0.012109 & 99 & c & 0.015051 & 100 & d & 0.046042 \\
+    101 & e & 0.049121 & 102 & f & 0.017400 & 103 & g & 0.017902 \\
+    104 & h & 0.028779 & 105 & i & 0.046567 & 106 & j & 0.000684 \\
+    107 & k & 0.008574 & 108 & l & 0.032405 & 109 & m & 0.017172 \\
+    110 & n & 0.026248 & 111 & o & 0.056350 & 112 & p & 0.008871 \\
+    113 & q & 0.000502 & 114 & r & 0.048391 & 115 & s & 0.050854 \\
+    116 & t & 0.039497 & 117 & u & 0.010422 & 118 & v & 0.005587 \\
+    119 & w & 0.021459 & 120 & x & 0.000319 & 121 & y & 0.015484 \\
+    122 & z & 0.000410 &  &  &  &  &  &  \\
+    \bottomrule
+\end{longtable}
+
+\newpage
+\section{Sample File Content}
+\subsection{Partial content in \texttt{original.txt}}
 \label{lst:originalpart}
+
+\texttt{original.txt} contains the first three chapters of \textit{the Game of Thrones}. Part of the content is shown below:
 
 \lstinputlisting[language=bash, style=custombash]{original_partof.txt} % bash
 
-\section{Part of the \texttt{binary\_huffman.txt}}
+\subsection{Partial content in \texttt{binary\_huffman.txt}}
 \label{lst:binaryhuffmanpart}
 
 \lstinputlisting[language=bash, style=custombash]{binary_huffman_part.txt} % bash
 
-\section{Part of the \texttt{processed.txt}}
+\subsection{Partial content in \texttt{processed.txt}}
 \label{lst:processedpart}
+
+The following content is the AME-encoded part of the content in Appendix~\ref{lst:originalpart}.
 
 \lstinputlisting[language=bash, style=custombash]{processed_part.txt} % bash
 
 \newpage
-\section{Metrics Definitions}
+\section{Performance Analysis}
+\subsection{Metrics Definitions for Entropy Coding}
 \label{app:metrics}
 
 The four main metrics of entropy coding include average code length $\bar{L}$, code rate $R$, efficiency $\eta$, and compression ratio $\xi$. They are defined as follows:
@@ -605,6 +665,13 @@ The compression ratio $\xi$ is defined as (w.r.t. ACSII encoding):
 \begin{equation}
     \xi = \frac{\bar{L}}{8}.
 \end{equation}
+
+\newpage
+\subsection{MATLAB Code for Performance Analysis of AME}
+\label{app:performanceAME}
+
+\lstinputlisting[caption={\texttt{Main} function to plot the curve}, language=Matlab, style=custommatlab]{../Others/performanceAnalysis/main.m} % matlab code from file
+
 
 \end{appendices}
 

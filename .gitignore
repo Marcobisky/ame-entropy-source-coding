@@ -1,6 +1,9 @@
 # Ignore folders
 /Report/
-/Reference/
+/References/
 
 # Ignore docx files
 *.docx
+.vscode
+.DS_Store
+*.csv

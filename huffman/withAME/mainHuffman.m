@@ -1,8 +1,8 @@
 % 1.initialise four different paths
 inputFilePath = 'processed.txt'; % the original text
-encodedFilePath = 'binary_ame.txt'; % binary-encoded text file
-dictFilePath = 'ame_huffman_dictionary.txt'; % dictionary: Huffman code for each character
-decodeFilePath = 'decoded_ame.txt'; % decoded text file
+encodedFilePath = 'binary_huffman_ame.txt'; % binary-encoded text file
+dictFilePath = 'Huffman_dictionary_ame.txt'; % dictionary: Huffman code for each character
+decodeFilePath = 'received_huffman_ame.txt'; % decoded text file
 
 % 2.read input text
 fileID = fopen(inputFilePath, 'r');

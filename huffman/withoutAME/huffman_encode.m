@@ -9,7 +9,6 @@ function [encodedMessage, dict] = huffman_encode(text)
     % calculate probabiliyies
     probabilities = counts / sum(counts);
     
-    
     dict = huffmandict(symbols, probabilities);
     
     % encode

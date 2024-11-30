@@ -1,23 +1,36 @@
 \contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
-\contentsline {section}{\numberline {2}Compression is Equivalent to Prediction}{4}{section.2}%
-\contentsline {section}{\numberline {3}Mechanism of AME Coding}{5}{section.3}%
-\contentsline {section}{\numberline {4}Entropy Coding Review}{6}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Mechanism of Huffman coding}{6}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Mechanism of Fano coding}{6}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Implementation}{7}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Without AME}{7}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}With AME}{8}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Results and Discussion}{9}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Performance comparison between Huffman and Fano coding}{9}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Performance analysis of AME coding}{10}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Conclusion and Future Work}{10}{section.7}%
-\contentsline {section}{\numberline {A}AME encode/decode algorithm}{12}{appendix.a.A}%
-\contentsline {section}{\numberline {B}Python code for AME encoding}{14}{appendix.a.B}%
-\contentsline {section}{\numberline {C}Python code for AME decoding}{16}{appendix.a.C}%
-\contentsline {section}{\numberline {D}Huffman Tree Generated for \texttt {original.txt}}{18}{appendix.a.D}%
-\contentsline {section}{\numberline {E}MATLAB code for huffman encode/decode procedure}{19}{appendix.a.E}%
-\contentsline {section}{\numberline {F}MATLAB code for huffman encode/decode procedure}{21}{appendix.a.F}%
-\contentsline {section}{\numberline {G}Part of the \texttt {original.txt}}{24}{appendix.a.G}%
-\contentsline {section}{\numberline {H}Part of the \texttt {binary\_huffman.txt}}{24}{appendix.a.H}%
-\contentsline {section}{\numberline {I}Part of the \texttt {processed.txt}}{24}{appendix.a.I}%
-\contentsline {section}{\numberline {J}Metrics Definitions}{25}{appendix.a.J}%
+\contentsline {section}{\numberline {2}The Idea of AME Coding}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Compression is Equivalent to Prediction}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Mechanism of AME Coding}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Entropy Coding Review}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Mechanism of Huffman coding}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Mechanism of Fano coding}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Implementation}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Without AME}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}With AME}{8}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Results and Discussion}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Performance comparison between Huffman and Fano coding}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Performance analysis of AME coding}{10}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusion and Future Work}{10}{section.6}%
+\contentsline {section}{References}{10}{section.6}%
+\contentsline {section}{\numberline {A}AME Coding Scheme}{12}{appendix.a.A}%
+\contentsline {subsection}{\numberline {A.1}AME encode algorithm}{12}{subsection.a.A.1}%
+\contentsline {subsection}{\numberline {A.2}AME decode algorithm}{13}{subsection.a.A.2}%
+\contentsline {subsection}{\numberline {A.3}Python code for AME encoding}{14}{subsection.a.A.3}%
+\contentsline {subsection}{\numberline {A.4}Python code for AME decoding}{16}{subsection.a.A.4}%
+\contentsline {section}{\numberline {B}Huffman Tree Visualization}{18}{appendix.a.B}%
+\contentsline {subsection}{\numberline {B.1}Huffman Tree Generated for \texttt {original.txt}}{18}{subsection.a.B.1}%
+\contentsline {subsection}{\numberline {B.2}Fano Tree Generated for \texttt {processed.txt}}{19}{subsection.a.B.2}%
+\contentsline {section}{\numberline {C}Entropy Coding Scheme}{20}{appendix.a.C}%
+\contentsline {subsection}{\numberline {C.1}MATLAB code for Huffman encode/decode procedure}{20}{subsection.a.C.1}%
+\contentsline {subsection}{\numberline {C.2}MATLAB code for Fano encode/decode procedure}{22}{subsection.a.C.2}%
+\contentsline {section}{\numberline {D}Characters Statistics}{25}{appendix.a.D}%
+\contentsline {subsection}{\numberline {D.1}Statistics in \texttt {original.txt}}{25}{subsection.a.D.1}%
+\contentsline {subsection}{\numberline {D.2}Statistics in \texttt {processed.txt}}{26}{subsection.a.D.2}%
+\contentsline {section}{\numberline {E}Sample File Content}{27}{appendix.a.E}%
+\contentsline {subsection}{\numberline {E.1}Partial content in \texttt {original.txt}}{27}{subsection.a.E.1}%
+\contentsline {subsection}{\numberline {E.2}Partial content in \texttt {binary\_huffman.txt}}{27}{subsection.a.E.2}%
+\contentsline {subsection}{\numberline {E.3}Partial content in \texttt {processed.txt}}{27}{subsection.a.E.3}%
+\contentsline {section}{\numberline {F}Performance Analysis}{28}{appendix.a.F}%
+\contentsline {subsection}{\numberline {F.1}Metrics Definitions for Entropy Coding}{28}{subsection.a.F.1}%
+\contentsline {subsection}{\numberline {F.2}MATLAB Code for Performance Analysis of AME}{29}{subsection.a.F.2}%

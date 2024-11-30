@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.11)  29 NOV 2024 23:56
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.11)  30 NOV 2024 22:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -416,7 +416,7 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 112
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-LaTeX Font Info:    Trying to load font information for T1+txtt on input line 41.
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 39.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/color.sty
@@ -645,30 +645,30 @@ File: l3backend-xetex.def 2023-01-16 L3 backend support: XeTeX
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 114.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 112.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 112.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 114.
-LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -713,48 +713,45 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 114.
+Package hyperref Info: Link coloring ON on input line 112.
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
 \c@lstlisting=\count345
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 119.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 117.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <24.88> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 119.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 117.
  [1
 
 ] (./main.toc
-LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 5.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 3.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 17.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 22.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 17.
-)
+))
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- (./main.lof)
+ [2] (./main.lof)
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
- (./main.lot [2])
+ (./main.lot)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
@@ -765,72 +762,46 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 File: AMEtree.png Graphic file (type bmp)
 <AMEtree.png>
- [5] [6]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5] [6]
 File: without-ame.png Graphic file (type bmp)
 <without-ame.png>
+ [7]
+File: originalStat.png Graphic file (type bmp)
+<originalStat.png>
 
-Overfull \hbox (6.87863pt too wide) in alignment at lines 250--255
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (6.87863pt too wide) in alignment at lines 255--258
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (6.87863pt too wide) in alignment at lines 258--260
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (6.87863pt too wide) in alignment at lines 260--284
- [] [] [] [] [] [] [] [] [] 
- []
-
-[7]
-Underfull \hbox (badness 4036) in paragraph at lines 286--286
+Underfull \hbox (badness 4036) in paragraph at lines 268--268
 [][][]\T1/lmr/m/n/10 The dic-tio-nar-ies to-gether with all codes can be found on [][]$\T1/lmtt/m/n/10 https : / / github . com / Marcobisky /
  []
 
 File: with-ame2.png Graphic file (type bmp)
 <with-ame2.png>
+
+Overfull \hbox (7.9488pt too wide) in paragraph at lines 285--286
+\T1/lmr/m/n/12 tion [][]2.2[][], we get the AME-encoded text (\T1/lmtt/m/n/12 processed.txt\T1/lmr/m/n/12 ). Part of the con-tent of (\T1/lmtt/m/n/12 processed.txt\T1/lmr/m/n/12 )
+ []
+
 [8]
-Overfull \hbox (6.87863pt too wide) in alignment at lines 307--310
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (6.87863pt too wide) in alignment at lines 310--313
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (6.87863pt too wide) in alignment at lines 313--315
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (6.87863pt too wide) in alignment at lines 315--341
- [] [] [] [] [] [] [] [] [] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[9] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: processedStat.png Graphic file (type bmp)
+<processedStat.png>
+ [9] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 382.
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 333.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 10.20007pt on input line 382.
+(Font)              scaled to size 10.20007pt on input line 333.
 Package textcomp Info: Symbol \textminus not provided by
 (textcomp)             font family fvm in TS1 encoding.
-(textcomp)             Default family used instead on input line 385.
- [10]
+(textcomp)             Default family used instead on input line 336.
+
+Missing character: There is no – ("2013) in font ec-lmr12!
+[10]
 Missing character: There is no “ ("201C) in font ec-lmr12!
 Missing character: There is no ” ("201D) in font ec-lmr12!
 Missing character: There is no – ("2013) in font ec-lmr12!
@@ -838,22 +809,35 @@ Missing character: There is no “ ("201C) in font ec-lmr12!
 Missing character: There is no ” ("201D) in font ec-lmr12!
 Missing character: There is no – ("2013) in font ec-lmr12!
 [11]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 455.
-
-Underfull \hbox (badness 10000) in paragraph at lines 507--508
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 420.
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 475--476
 [] []\T1/lmr/m/n/12 Predict next char-ac-ter us-ing \T1/lmtt/m/n/12 tree\T1/lmr/m/n/12 : \T1/lmtt/m/n/12 prediction = predict_next(tree,
  []
 
-[12] [13] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+[13] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 528.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 496.
  (../markovpy/adaptive_markov_encode.py [14]) [15] (../markovpy/adaptive_markov_decode.py [16]) [17]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 537.
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 506.
 File: huffmanTree.png Graphic file (type bmp)
 <huffmanTree.png>
- [18] (../huffman/withoutAME/huffman_encode.m) (../huffman/withoutAME/huffman_decode.m) (../huffman/withoutAME/mainHuffman.m
+
+Overfull \hbox (38.17398pt too wide) in paragraph at lines 511--513
+ []|  [] 
+ []
+
+[18]
+File: huffmanTree_ame.png Graphic file (type bmp)
+<huffmanTree_ame.png>
+
+Overfull \hbox (35.32896pt too wide) in paragraph at lines 523--525
+ []|  [] 
+ []
+
+[19] (../huffman/withoutAME/huffman_encode.m) (../huffman/withoutAME/huffman_decode.m) (../huffman/withoutAME/mainHuffman.m
 LaTeX Font Info:    Trying to load font information for TS1+fvm on input line 2.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/bera/ts1fvm.fd
 File: ts1fvm.fd 2004/09/07 scalable font definitions for TS1/fvm.
@@ -863,11 +847,11 @@ LaTeX Font Info:    Font shape `TS1/fvm/m/n' will be
 Package textcomp Info: Symbol \textminus not provided by
 (textcomp)             font family fvm in TS1 encoding.
 (textcomp)             Default family used instead on input line 3.
- [19]) [20] (../fano/withoutAME/fano_encode.m [21]) (../fano/withoutAME/fano_decode.m) (../fano/withoutAME/mainFano.m
+ [20]) [21] (../fano/withoutAME/fano_encode.m [22]) (../fano/withoutAME/fano_decode.m) (../fano/withoutAME/mainFano.m
 Package textcomp Info: Symbol \textminus not provided by
 (textcomp)             font family fvm in TS1 encoding.
 (textcomp)             Default family used instead on input line 3.
- [22]) [23] (./original_partof.txt
+ [23]) [24] [25] [26] (./original_partof.txt
 Missing character: There is no ” ("201D) in font ec-lmtt12!
 Missing character: There is no “ ("201C) in font ec-lmtt12!
 Missing character: There is no ” ("201D) in font ec-lmtt12!
@@ -893,17 +877,34 @@ Missing character: There is no “ ("201C) in font ec-lmtt12!
 Missing character: There is no ” ("201D) in font ec-lmtt12!
 Missing character: There is no “ ("201C) in font ec-lmtt12!
 Missing character: There is no “ ("201C) in font ec-lmtt12!
-) [24] [25] (./main.aux)
+) [27] [28] (../Others/performanceAnalysis/main.m
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fvm in TS1 encoding.
+(textcomp)             Default family used instead on input line 26.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fvm in TS1 encoding.
+(textcomp)             Default family used instead on input line 35.
+ [29]
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fvm in TS1 encoding.
+(textcomp)             Default family used instead on input line 50.
+Package textcomp Info: Symbol \textminus not provided by
+(textcomp)             font family fvm in TS1 encoding.
+(textcomp)             Default family used instead on input line 50.
+) [30] (./main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 896C3B429227FE40586158B924DEB99C;4463.
+(rerunfilecheck)             Checksum: CEC7794524D86D6C38DA2CB0F4011E80;7130.
  ) 
 Here is how much of TeX's memory you used:
- 25678 strings out of 476683
- 472407 string characters out of 5804046
- 2242018 words of memory out of 5000000
- 45406 multiletter control sequences out of 15000+600000
- 578454 words of font info for 92 fonts, out of 8000000 for 9000
+ 25763 strings out of 476683
+ 474088 string characters out of 5804046
+ 2240018 words of memory out of 5000000
+ 45485 multiletter control sequences out of 15000+600000
+ 578136 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,13n,89p,1287b,2030s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,13n,89p,1287b,2070s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (25 pages).
+Output written on main.pdf (30 pages).

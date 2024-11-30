@@ -10,12 +10,12 @@ function decodedMessage = fano_decode(encodedMessage, dict)
 
     % Iterate through the encoded message to decode
     for i = 1:length(encodedMessage)
-        buffer = strcat(buffer, encodedMessage(i)); % Append bit to buffer
+        buffer = [buffer, encodedMessage(i)]; % Append bit to buffer
 
         if isKey(codeMap, buffer)
             % If the buffer matches a code in the dictionary
             decodedChar = codeMap(buffer);
-            decodedMessage = strcat(decodedMessage, decodedChar);
+            decodedMessage = [decodedMessage, decodedChar];
             buffer = ''; % Reset the buffer
         end
     end
