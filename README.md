@@ -1,66 +1,98 @@
-# Source Coding for Game of Thrones
+# Adaptive Markov Entropy Coding Project
 
-This project explores the implementation of **Huffman Coding** and **Fano Coding** for compressing the first three chapters of *Game of Thrones*. It also introduces a novel **Second-order Adaptive Markov Encoding (AME)** technique to enhance compression efficiency by leveraging the structural patterns in the source text.
+This project explores entropy-based compression techniques using **Huffman Coding**, **Fano Coding**, and an innovative **Second-order Adaptive Markov Encoding (AME)** scheme. Implementations and evaluations are performed using MATLAB and Python.
 
-Further details see `report.pdf`.
+## Overview
+
+Data compression is essential for efficient storage and transmission. The project focuses on comparing Huffman and Fano coding, widely used lossless entropy-based methods, and introduces AME coding, which enhances compression by leveraging predictive modeling.
+
+---
 
 ## Features
 
-- **Huffman Coding**: A lossless compression algorithm that generates optimal prefix-free codes by assigning shorter codes to frequently occurring characters.
-- **Fano Coding**: A similar algorithm to Huffman, but less efficient for uniformly distributed symbol probabilities.
-- **Second-order AME**: A pre-processing method to uncover source structures, improving entropy coding performance.
+- **Huffman Coding**:
+  - Assigns shorter codes to frequently occurring symbols.
+  - MATLAB implementation with tree visualization.
+- **Fano Coding**:
+  - Similar to Huffman but uses frequency balancing.
+  - MATLAB implementation with tree visualization.
+- **Second-order Adaptive Markov Encoding (AME)**:
+  - Pre-processes text to predict and compress based on structural patterns.
+  - Python implementation with adaptive tree modeling.
 
-## Key Metrics
+---
 
-The project evaluates the following metrics to compare the performance of the algorithms:
+## Implementation
 
-- **Average Code Length (L̄)**
-- **Code Rate (R)**
-- **Efficiency (η)**
-- **Compression Ratio (ξ)**
+### Without AME:
+1. Analyze character frequencies in `original.txt`.
+2. Perform Huffman and Fano coding.
+3. Compute performance metrics:
+   - Average Code Length (L̄)
+   - Code Rate (R)
+   - Efficiency (η)
+   - Compression Ratio (ξ).
 
-## Implementation Details
+### With AME:
+1. Pre-process `original.txt` using AME.
+2. Apply Huffman and Fano coding to the AME-processed text.
+3. Evaluate binary file size improvements.
 
-1. **Without AME**:
-   - Calculated the frequency of each character in the source text.
-   - Generated Huffman and Fano trees for encoding.
-   - Measured compression metrics.
-
-2. **With AME**:
-   - Applied AME pre-processing to extract memoryless components.
-   - Encoded and decoded the AME-processed text.
-   - Compared the compressed file sizes with and without AME.
+---
 
 ## Results
 
-- **Huffman Coding** consistently outperformed **Fano Coding** in all metrics.
-- The **AME** technique demonstrated significant savings in compressed file sizes.
+### Performance Metrics:
+| Metric        | Huffman | Fano   |
+|---------------|---------|--------|
+| Avg. Code Len (L̄) | 4.5023  | 8.4244 |
+| Code Rate (R) | 0.9909  | 0.5282 |
+| Efficiency (η) | 0.9909  | 0.5282 |
+| Compression Ratio (ξ) | 0.5628  | 1.0530 |
 
-| Metric         | Huffman | Fano  |
-|----------------|---------|-------|
-| Avg Code Length| 4.4769  | 8.6370|
-| Code Rate (R)  | 0.9897  | 0.5117|
-| Efficiency (η) | 0.9897  | 0.5117|
-| Compression (ξ)| 0.5596  | 1.0796|
-
-## Code and Tools
-
-- MATLAB scripts for Huffman and Fano encoding/decoding.
-- Python implementation of the AME algorithm.
-
-## Future Work
-
-- Enhance AME by using higher-order Markov models.
-- Explore advanced mathematical models for better structure detection and compression.
-
-## Authors
-
-- Jinming Ren
-- Yuhao Liu
-
-## Contact
-
-For further details, refer to the documentation or contact us at marcobisky@outlook.com.
+### Impact of AME:
+- AME improves binary file size:
+  - **Huffman**: 5.25% reduction.
+  - **Fano**: 4.37% reduction.
+- Efficiency increases with longer texts.
 
 ---
-This project demonstrates the efficacy of source coding techniques in achieving efficient data compression and highlights the potential of combining structural analysis with entropy coding.
+
+## Visualization
+
+### Huffman Tree:
+- Visualized for `original.txt`.
+
+### Fano Tree:
+- Visualized for `processed.txt`.
+
+---
+
+## Files and Resources
+
+### Input Files:
+- `original.txt`: Source text (first 3 chapters of *Game of Thrones*).
+
+### Output Files:
+- `binary_huffman.txt`, `binary_fano.txt`: Encoded binary files.
+- `processed.txt`: AME-encoded file.
+- `received_huffman.txt`, `received_fano.txt`: Decoded files.
+
+### Source Code:
+- Python:
+  - `adaptive_markov_encode.py`: AME encoding.
+  - `adaptive_markov_decode.py`: AME decoding.
+- MATLAB:
+  - `huffman_encode.m`, `fano_encode.m`: Encoding procedures.
+  - `huffman_decode.m`, `fano_decode.m`: Decoding procedures.
+
+### Visuals:
+- Huffman and Fano trees, character frequency distributions.
+
+---
+
+## Contact us
+
+Please contact us if you need help: 
+* Jinming Ren (marcobisky@outlook.com)
+* Yuhao Liu
