@@ -1,6 +1,13 @@
 # Ignore folders
-/Report/
+/Report/*
+!/Report/main.tex
+
 /References/
+/ppt/*
+!/ppt/presentation.pdf
+!/ppt/main.tex
+
+
 
 # Ignore docx files
 *.docx
