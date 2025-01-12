@@ -1,11 +1,15 @@
 # Ignore folders
 /Report/*
 !/Report/main.tex
+!/Report/*.bib
+!/Report/*.png
 
 /References/
 /ppt/*
 !/ppt/presentation.pdf
-!/ppt/main.tex
+!/ppt/*.tex
+!/ppt/*.bib
+!/ppt/*.png
 
 
 
